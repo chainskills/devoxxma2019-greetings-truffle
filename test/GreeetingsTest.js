@@ -11,12 +11,9 @@ contract('Greetings -> using Truffle abstraction', async accounts => {
   });
 
   it('should let us get the initial message', async () => {
-    // retrieve the current greetings message
-    const greetings = await contractInstance.getGreetings();
-
     // check that we have properly deployed our contract
     assert.equal(
-      greetings,
+      await contractInstance.getGreetings(),
       defaultMessage,
       'The default greetings message shoud be ' + defaultMessage
     );
@@ -24,16 +21,13 @@ contract('Greetings -> using Truffle abstraction', async accounts => {
 
   it('should let us change the initial message', async () => {
     // change the greetings message
-    const receipt = await contractInstance.setGreetings(newMessage, {
+    await contractInstance.setGreetings(newMessage, {
       from: accounts[1]
     });
 
-    // retrieve the current greetings message
-    const greetings = await contractInstance.getGreetings();
-
     // check that we have properly deployed our contract
     assert.equal(
-      greetings,
+      await contractInstance.getGreetings(),
       newMessage,
       'The new greetings message shoud be ' + newMessage
     );
