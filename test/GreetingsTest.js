@@ -21,9 +21,30 @@ contract('Greetings -> using Truffle abstraction', async accounts => {
 
   it('should let us change the initial message', async () => {
     // change the greetings message
-    await contractInstance.setGreetings(newMessage, {
+    const receipt = await contractInstance.setGreetings(newMessage, {
       from: accounts[1]
     });
+
+    assert.equal(
+      receipt.logs.length,
+      1,
+      'one event should have been triggered'
+    );
+    assert.equal(
+      receipt.logs[0].event,
+      'GreetingsChangedEvent',
+      'event should be GreetingsChangedEvent'
+    );
+    assert.equal(
+      receipt.logs[0].args._account,
+      accounts[1],
+      'the caller must be ' + accounts[1]
+    );
+    assert.equal(
+      receipt.logs[0].args._greetings,
+      newMessage,
+      'the new message must be ' + newMessage
+    );
 
     // check that we have properly deployed our contract
     assert.equal(
