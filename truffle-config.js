@@ -39,8 +39,7 @@ module.exports = {
     ganache: {
       host: '127.0.0.1',
       port: 7545,
-      network_id: '*',
-      websockets: true
+      network_id: '*'
     }
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
@@ -82,7 +81,7 @@ module.exports = {
 
   // Set default mocha options here, use special reporters etc.
   mocha: {
-    timeout: 100000
+    //timeout: 100000
   },
 
   // Configure your compilers
