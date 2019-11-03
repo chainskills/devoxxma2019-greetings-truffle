@@ -132,4 +132,4 @@ If you want to know more about all the steps required to install, build and depl
 
 Have fun !!!
 
-ChainSkills Team - 2018
+ChainSkills Team - 2019
