@@ -5,6 +5,7 @@ contract('Greetings -> using Truffle abstraction', async accounts => {
   let contractInstance;
   const defaultMessage = 'Hello from Devoxx Morocco 2019!';
   const newMessage = 'Hello from Agadir!';
+  const errorMessage = 'The message should not be empty!';
 
   before('setup contract for each test', async () => {
     contractInstance = await greetingsContract.deployed();
@@ -52,5 +53,18 @@ contract('Greetings -> using Truffle abstraction', async accounts => {
       newMessage,
       'The new greetings message shoud be ' + newMessage
     );
+  });
+
+  it('should throw an exception if the message is empty', async () => {
+    try {
+      // try to save an emoty message
+      await contractInstance.setGreetings('', {
+        from: accounts[1]
+      });
+
+      assert.fail();
+    } catch (err) {
+      assert.equal(err.reason, errorMessage, 'error must be ' + errorMessage);
+    }
   });
 });

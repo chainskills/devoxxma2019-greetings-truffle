@@ -6,6 +6,7 @@ describe('Greetings -> compliant with Mocha', () => {
   let contractInstance;
   const defaultMessage = 'Hello from Devoxx Morocco 2019!';
   const newMessage = 'Hello from Agadir!';
+  const errorMessage = 'The message should not be empty!';
 
   before(async () => {
     accounts = await web3.eth.getAccounts();
@@ -34,34 +35,17 @@ describe('Greetings -> compliant with Mocha', () => {
       'The new greetings message shoud be ' + newMessage
     );
   });
-  /*
-  it('should let us get the initial message', async () => {
-    // retrieve the current greetings message
-    const greetings = await contractInstance.getGreetings();
+  
+  it('should throw an exception if the message is empty', async () => {
+    try {
+      // try to save an emoty message
+      await contractInstance.setGreetings('', {
+        from: accounts[1]
+      });
 
-    // check that we have properly deployed our contract
-    assert.equal(
-      greetings,
-      defaultMessage,
-      'The default greetings message shoud be ' + defaultMessage
-    );
+      assert.fail();
+    } catch (err) {
+      assert.equal(err.reason, errorMessage, 'error must be ' + errorMessage);
+    }
   });
-
-  it('should let us change the initial message', async () => {
-    // change the greetings message
-    const receipt = await contractInstance.setGreetings(newMessage, {
-      from: accounts[1]
-    });
-
-    // retrieve the current greetings message
-    const greetings = await contractInstance.getGreetings();
-
-    // check that we have properly deployed our contract
-    assert.equal(
-      greetings,
-      newMessage,
-      'The new greetings message shoud be ' + newMessage
-    );
-  });
-  */
 });

@@ -14,7 +14,11 @@ contract Greetings {
     }
 
     function setGreetings(string memory _message) public {
+        bytes memory newMessage = bytes(_message);
+        require(newMessage.length > 0 , "The message should not be empty!");
+        
         message = _message;
+        
         emit GreetingsChangedEvent(msg.sender, _message);
     }
 
