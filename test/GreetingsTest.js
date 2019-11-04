@@ -9,10 +9,12 @@ contract('Greetings -> using Truffle abstraction', async accounts => {
   const errorEmptyMessage = 'The message should not be empty!';
   const errorNotOwner = 'Your are not the owner of this contract!';
   const errorServiceFee = 'Your service fee is not correct!';
+  const errorDisable = 'The contract is not enabled!';
 
   before('setup contract for each test', async () => {
     contractInstance = await greetingsContract.deployed(
-      web3.utils.toBN(serviceFee)
+      web3.utils.toBN(serviceFee),
+      true
     );
   });
 
@@ -184,5 +186,39 @@ contract('Greetings -> using Truffle abstraction', async accounts => {
       '0',
       'The balance must be 0'
     );
+  });
+
+  it('should let us disable contract', async () => {
+    // transfer the earnings to the contract's owner
+    await contractInstance.disableContract({
+      from: accounts[0],
+      gas: 500000
+    });
+
+    try {
+      await contractInstance.setGreetings('Are you enable?', {
+        from: accounts[1],
+        gas: 500000,
+        value: web3.utils.toBN(serviceFee).sub(web3.utils.toBN(1))
+      });
+
+      assert.fail();
+    } catch (err) {
+      assert.equal(err.reason, errorDisable, 'error must be ' + errorDisable);
+    }
+  });
+
+  it('should let us enable contract', async () => {
+    // transfer the earnings to the contract's owner
+    await contractInstance.enableContract({
+      from: accounts[0],
+      gas: 500000
+    });
+
+    await contractInstance.setGreetings('Are you enable?', {
+      from: accounts[1],
+      gas: 500000,
+      value: web3.utils.toBN(serviceFee)
+    });
   });
 });

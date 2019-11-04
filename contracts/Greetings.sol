@@ -4,20 +4,42 @@ contract Greetings {
     string message;
     uint256 serviceFee;
     address payable public owner;
+    bool public enable;
 
     // Events
     event GreetingsChangedEvent (address indexed _account, string _greetings);
     event NewServiceFeeEvent (uint256 _serviceFee);
 
 
-    constructor(uint256 _serviceFee) public {
+    constructor(uint256 _serviceFee, bool _enable) public {
         message = "Hello from Devoxx Morocco 2019!";
         serviceFee = _serviceFee;
         owner = msg.sender;
+        enable = _enable;
+    }
+    
+    // kill the smart contract 
+    function kill() public {
+        require(msg.sender == owner, "Your are not the owner of this contract!");      
+        selfdestruct(msg.sender);
+    }
+
+    // Enable the smart contract 
+    function enableContract() public {
+        require(msg.sender == owner, "Your are not the owner of this contract!");      
+        enable = true;
+    }
+
+    // kill the smart contract 
+    function disableContract() public {
+        require(msg.sender == owner, "Your are not the owner of this contract!");      
+        enable = false;
     }
 
     // Setters
     function setGreetings(string memory _message) payable public {
+        require(enable == true , "The contract is not enabled!");
+
         bytes memory newMessage = bytes(_message);
         require(newMessage.length > 0 , "The message should not be empty!");
 
@@ -29,6 +51,8 @@ contract Greetings {
     }
 
     function setServiceFee(uint256 _serviceFee) public {
+        require(enable == true , "The contract is not enabled!");
+        
         require(msg.sender == owner , "Your are not the owner of this contract!");
         
         serviceFee = _serviceFee;
