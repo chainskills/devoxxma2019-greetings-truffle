@@ -1,7 +1,7 @@
-const greetingsContract = artifacts.require('Greetings');
+const Greetings = artifacts.require('Greetings');
 
 // test suite
-contract('Greetings -> using Truffle abstraction', async accounts => {
+describe('Greetings -> compliant with Mocha', () => {
   let contractInstance;
   const serviceFee = '10000000000000000';
   const defaultMessage = 'Hello from Devoxx Morocco 2019!';
@@ -10,10 +10,9 @@ contract('Greetings -> using Truffle abstraction', async accounts => {
   const errorNotOwner = 'Your are not the owner of this contract!';
   const errorServiceFee = 'Your service fee is not correct!';
 
-  before('setup contract for each test', async () => {
-    contractInstance = await greetingsContract.deployed(
-      web3.utils.toBN(serviceFee)
-    );
+  before(async () => {
+    accounts = await web3.eth.getAccounts();
+    contractInstance = await Greetings.new(web3.utils.toBN(serviceFee));
   });
 
   it('should let us get the initial settings', async () => {
