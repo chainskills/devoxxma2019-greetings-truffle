@@ -19,15 +19,15 @@ const App = ({drizzleContext}) => {
   }, []);
 
   useEffect(() => {
-    if (initialized === true) {
-      async function fetchData() {
+    if (initialized) {
+      async function fetchAccount() {
         const currAccout = drizzleState.accounts[0];
         const currBalance = await drizzle.web3.eth.getBalance(currAccout);
 
         setAccount(currAccout);
         setBalance(drizzle.web3.utils.fromWei(currBalance, "ether"));
       }
-      fetchData();
+      fetchAccount();
     }
     // eslint-disable-next-line
   }, [initialized, drizzleState]);
