@@ -1,0 +1,10 @@
+header,
+main,
+footer,
+.container {
+  padding-left: 230px;
+}
+
+body {
+  background-color: #eceff1;
+}
