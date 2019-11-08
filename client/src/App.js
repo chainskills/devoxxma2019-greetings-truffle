@@ -10,13 +10,18 @@ const App = ({drizzleContext}) => {
   const {drizzleState, drizzle, initialized} = drizzleContext;
   const [account, setAccount] = useState(null);
   const [balance, setBalance] = useState(0);
+  const [owner, setOwner] = useState(null);
 
   const refFirstField = useRef(null);
-  const [greetings, setGreetings] = useState("");
   const [newGreetings, setNewGreetings] = useState("");
 
   const [greetingsKey, setGreetingsKey] = useState(null);
   const [serviceFeeKey, setServiceFeeKey] = useState(null);
+
+  const [greetings, setGreetings] = useState({
+    message: "",
+    serviceFee: 0
+  });
 
   useEffect(() => {
     M.AutoInit();
@@ -25,21 +30,42 @@ const App = ({drizzleContext}) => {
   }, []);
 
   const onChange = e => {
-    setGreetings(e.target.value);
+    setGreetings({
+      ...greetings,
+      [e.target.name]: e.target.value
+    });
   };
 
-  const onSubmit = () => {
+  const onSaveGreetings = () => {
     setNewGreetings(greetings);
 
     const {Greetings} = drizzle.contracts;
 
     // save the project
     Greetings.methods
-      .setGreetings(greetings)
+      .setGreetings(greetings.message)
       .send({
         from: account,
         gas: 500000,
-        value: serviceFee
+        value: serviceFeeRef
+      })
+      .on("receipt", receipt => {
+        console.log(receipt);
+      })
+      .on("error", err => {
+        console.error(err);
+      });
+  };
+
+  const onSaveServiceFee = () => {
+    const {Greetings} = drizzle.contracts;
+
+    // save the project
+    Greetings.methods
+      .setServiceFee(drizzle.web3.utils.toWei(greetings.serviceFee))
+      .send({
+        from: account,
+        gas: 500000
       })
       .on("receipt", receipt => {
         console.log(receipt);
@@ -71,6 +97,8 @@ const App = ({drizzleContext}) => {
         setServiceFeeKey(
           Greetings.methods.getServiceFee.cacheCall({from: currAccout})
         );
+
+        setOwner(await Greetings.methods.owner().call());
       }
       fetchAccount();
     }
@@ -103,16 +131,18 @@ const App = ({drizzleContext}) => {
     }
   }
 
-  let serviceFee = null;
+  let serviceFeeRef = null;
   if (serviceFeeKey !== null) {
     if (
       drizzleState.contracts.Greetings.getServiceFee[serviceFeeKey] &&
       drizzleState.contracts.Greetings.getServiceFee[serviceFeeKey].value
     ) {
-      serviceFee =
+      serviceFeeRef =
         drizzleState.contracts.Greetings.getServiceFee[serviceFeeKey].value;
     }
   }
+
+  const {message, serviceFee} = greetings;
 
   return (
     <div className="container">
@@ -132,8 +162,8 @@ const App = ({drizzleContext}) => {
         <div className="col m12">
           <p>
             The service fee is:{" "}
-            {serviceFee !== null
-              ? drizzle.web3.utils.fromWei(serviceFee, "ether")
+            {serviceFeeRef !== null
+              ? drizzle.web3.utils.fromWei(serviceFeeRef, "ether")
               : null}{" "}
             ETH
           </p>
@@ -145,8 +175,8 @@ const App = ({drizzleContext}) => {
             className="materialize-textarea has-character-counter"
             ref={refFirstField}
             type="text"
-            name="title"
-            value={greetings}
+            name="message"
+            value={message}
             data-length={50}
             onChange={onChange}
             style={{height: "4rem"}}
@@ -160,38 +190,40 @@ const App = ({drizzleContext}) => {
           <a
             href="#!"
             className="waves-effect waves-light btn left primary-content blue"
-            onClick={() => onSubmit()}
+            onClick={() => onSaveGreetings()}
             style={{margin: "5px"}}
           >
             Send
           </a>
         </div>
       </div>
-      <div className="row">
-        <div className="col m2 input-field">
-          <input
-            type="number"
-            name="price"
-            value={0}
-            min={0}
-            onChange={onSubmit}
-            step={".01"}
-          />
-          <label htmlFor="price" className="active">
-            Service fee in ETH
-          </label>
+      {owner === account && (
+        <div className="row">
+          <div className="col m2 input-field">
+            <input
+              type="number"
+              name="serviceFee"
+              value={serviceFee}
+              min={0}
+              onChange={onChange}
+              step={".01"}
+            />
+            <label htmlFor="price" className="active">
+              Service fee in ETH
+            </label>
+          </div>
+          <div className="col m3 input-field">
+            <a
+              href="#!"
+              className="waves-effect waves-light btn left primary-content blue"
+              onClick={() => onSaveServiceFee()}
+              style={{margin: "5px"}}
+            >
+              Send
+            </a>
+          </div>
         </div>
-        <div className="col m3 input-field">
-          <a
-            href="#!"
-            className="waves-effect waves-light btn left primary-content blue"
-            onClick={() => onSubmit()}
-            style={{margin: "5px"}}
-          >
-            Send
-          </a>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
