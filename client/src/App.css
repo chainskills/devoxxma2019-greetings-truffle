@@ -12,11 +12,6 @@ body {
   background-color: #eceff1;
 }
 
-.valign-wrapper {
-  display: flex !important;
-  align-items: center;
-}
-
 .greetings-data {
   background-color: white;
   border-radius: 5px;

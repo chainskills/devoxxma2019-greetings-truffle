@@ -89,7 +89,7 @@ const App = ({drizzleContext}) => {
   }
 
   return (
-    <div className="container valign-wrapper">
+    <div className="container">
       <div className="row">
         <Account account={account} balance={balance} />
 
