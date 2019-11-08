@@ -140,14 +140,14 @@ const App = ({drizzleContext}) => {
         </div>
       </div>
       <div className="row">
-        <div className="col m8 input-field">
+        <div className="col m5 input-field">
           <textarea
             className="materialize-textarea has-character-counter"
             ref={refFirstField}
             type="text"
             name="title"
             value={greetings}
-            data-length={80}
+            data-length={50}
             onChange={onChange}
             style={{height: "4rem"}}
           />
@@ -156,16 +156,39 @@ const App = ({drizzleContext}) => {
             Enter a new Greetings
           </label>
         </div>
-      </div>
-      <div className="row">
-        <div className="col m8 input-field">
+        <div className="col m3 input-field">
           <a
             href="#!"
-            className="col s12 m2 waves-effect waves-light btn-small right primary-content blue"
+            className="waves-effect waves-light btn left primary-content blue"
             onClick={() => onSubmit()}
             style={{margin: "5px"}}
           >
-            Save
+            Send
+          </a>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col m2 input-field">
+          <input
+            type="number"
+            name="price"
+            value={0}
+            min={0}
+            onChange={onSubmit}
+            step={".01"}
+          />
+          <label htmlFor="price" className="active">
+            Service fee in ETH
+          </label>
+        </div>
+        <div className="col m3 input-field">
+          <a
+            href="#!"
+            className="waves-effect waves-light btn left primary-content blue"
+            onClick={() => onSubmit()}
+            style={{margin: "5px"}}
+          >
+            Send
           </a>
         </div>
       </div>
