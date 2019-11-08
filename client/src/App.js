@@ -89,28 +89,31 @@ const App = ({drizzleContext}) => {
   }
 
   return (
-    <div className="container">
-      <Account account={account} balance={balance} />
+    <div className="container valign-wrapper">
+      <div className="row">
+        <Account account={account} balance={balance} />
 
-      <Information
-        drizzle={drizzle}
-        greetings={currentGreetings}
-        serviceFee={serviceFeeRef}
-      />
+        <div className="col m8 greetings-data">
+          <Information
+            drizzle={drizzle}
+            greetings={currentGreetings}
+            serviceFee={serviceFeeRef}
+          />
+          <Greetings
+            drizzle={drizzle}
+            account={account}
+            serviceFee={serviceFeeRef}
+          />
 
-      <Greetings
-        drizzle={drizzle}
-        account={account}
-        serviceFee={serviceFeeRef}
-      />
-
-      {owner === account && (
-        <ServiceFee
-          drizzle={drizzle}
-          account={account}
-          serviceFee={serviceFeeRef}
-        />
-      )}
+          {owner === account && (
+            <ServiceFee
+              drizzle={drizzle}
+              account={account}
+              serviceFee={serviceFeeRef}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 };

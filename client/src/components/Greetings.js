@@ -44,7 +44,7 @@ const Greetings = ({drizzle, account, serviceFee}) => {
 
   return (
     <div className="row">
-      <div className="col m5 input-field">
+      <div className="col m9 input-field">
         <textarea
           className="materialize-textarea has-character-counter"
           ref={refFirstField}

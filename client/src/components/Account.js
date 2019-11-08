@@ -14,15 +14,15 @@ const Account = ({account, balance}) => {
   }, []);
 
   return (
-    <div className="row">
-      <div className="col m12">
+
+      <div className="col m4">
         <div className="avatar">
           <JazzIcon diameter={40} seed={jsNumberForAddress(account)} />
-          <p className="account">{account}</p>
+          <p className="account truncate">{account}</p>
           <p className="balance">{balance} ETH</p>
         </div>
       </div>
-    </div>
+    
   );
 };
 

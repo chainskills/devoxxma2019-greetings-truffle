@@ -31,7 +31,7 @@ const ServiceFee = ({drizzle, account, serviceFee}) => {
 
   return (
     <div className="row">
-      <div className="col m2 input-field">
+      <div className="col m9 input-field">
         <input
           type="number"
           name="serviceFee"
