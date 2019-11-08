@@ -1,10 +1,22 @@
 import React, {useState, useEffect} from "react";
+import JazzIcon, {jsNumberForAddress} from "react-jazzicon";
+
+import "materialize-css/dist/css/materialize.min.css";
+import M from "materialize-css/dist/js/materialize.min.js";
+
 import "./App.css";
 
 const App = ({drizzleContext}) => {
   const {drizzleState, drizzle, initialized} = drizzleContext;
   const [account, setAccount] = useState(null);
   const [balance, setBalance] = useState(0);
+
+  useEffect(() => {
+    // Initialize Materialize JS
+    M.AutoInit();
+
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (initialized === true) {
@@ -22,7 +34,7 @@ const App = ({drizzleContext}) => {
 
   if (!initialized || account === null) {
     return (
-      <div className="App">
+      <div className="container">
         <h2>Preparing the Dapp ...</h2>
       </div>
     );
@@ -35,9 +47,30 @@ const App = ({drizzleContext}) => {
   });
 
   return (
-    <div className="App">
-      <h2>Hello {account}</h2>
-      <h3>Your balance is: {balance}</h3>
+    <div className="container">
+      <div className="row">
+        <div className="col m4">
+          <div style={{marginTop: "20px"}} className="avatar">
+            <JazzIcon diameter={40} seed={jsNumberForAddress(account)} />
+            <p
+              className="truncate"
+              style={{
+                position: "relative",
+                top: "7px",
+                width: "130px",
+                paddingLeft: "10px"
+              }}
+            >
+              {account}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col m4">
+          <p>Balance: {balance} ETH</p>
+        </div>
+      </div>
     </div>
   );
 };
