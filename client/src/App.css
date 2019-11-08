@@ -16,4 +16,16 @@ body {
   height: 42px !important;
   border-radius: 100% !important;
   vertical-align: top !important;
+  margin-top: 15px !important;
+}
+
+.account {
+  position: relative;
+  top: 7px;
+  width: 130px;
+  padding-left: 10px;
+}
+
+.balance {
+  padding-left: 53px;
 }

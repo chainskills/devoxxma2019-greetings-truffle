@@ -49,26 +49,12 @@ const App = ({drizzleContext}) => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col m4">
-          <div style={{marginTop: "20px"}} className="avatar">
+        <div className="col m6">
+          <div className="avatar">
             <JazzIcon diameter={40} seed={jsNumberForAddress(account)} />
-            <p
-              className="truncate"
-              style={{
-                position: "relative",
-                top: "7px",
-                width: "130px",
-                paddingLeft: "10px"
-              }}
-            >
-              {account}
-            </p>
+            <p className="truncate account">{account}</p>
+            <p className="balance">{balance} ETH</p>
           </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col m4">
-          <p>Balance: {balance} ETH</p>
         </div>
       </div>
     </div>
