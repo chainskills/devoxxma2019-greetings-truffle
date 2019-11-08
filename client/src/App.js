@@ -15,6 +15,9 @@ const App = ({drizzleContext}) => {
   const [greetings, setGreetings] = useState("");
   const [newGreetings, setNewGreetings] = useState("");
 
+  const [greetingsKey, setGreetingsKey] = useState(null);
+  const [serviceFeeKey, setServiceFeeKey] = useState(null);
+
   useEffect(() => {
     M.AutoInit();
 
@@ -27,6 +30,23 @@ const App = ({drizzleContext}) => {
 
   const onSubmit = () => {
     setNewGreetings(greetings);
+
+    const {Greetings} = drizzle.contracts;
+
+    // save the project
+    Greetings.methods
+      .setGreetings(greetings)
+      .send({
+        from: account,
+        gas: 500000,
+        value: serviceFee
+      })
+      .on("receipt", receipt => {
+        console.log(receipt);
+      })
+      .on("error", err => {
+        console.error(err);
+      });
   };
 
   useEffect(() => {
@@ -45,6 +65,12 @@ const App = ({drizzleContext}) => {
         if (refFirstField !== null) {
           refFirstField.current.focus();
         }
+
+        const {Greetings} = drizzle.contracts;
+        setGreetingsKey(Greetings.methods.getGreetings.cacheCall());
+        setServiceFeeKey(
+          Greetings.methods.getServiceFee.cacheCall({from: currAccout})
+        );
       }
       fetchAccount();
     }
@@ -65,6 +91,29 @@ const App = ({drizzleContext}) => {
     window.location.reload();
   });
 
+  // prepare ...
+  let currentGreetings = null;
+  if (greetingsKey !== null) {
+    if (
+      drizzleState.contracts.Greetings.getGreetings[greetingsKey] &&
+      drizzleState.contracts.Greetings.getGreetings[greetingsKey].value
+    ) {
+      currentGreetings =
+        drizzleState.contracts.Greetings.getGreetings[greetingsKey].value;
+    }
+  }
+
+  let serviceFee = null;
+  if (serviceFeeKey !== null) {
+    if (
+      drizzleState.contracts.Greetings.getServiceFee[serviceFeeKey] &&
+      drizzleState.contracts.Greetings.getServiceFee[serviceFeeKey].value
+    ) {
+      serviceFee =
+        drizzleState.contracts.Greetings.getServiceFee[serviceFeeKey].value;
+    }
+  }
+
   return (
     <div className="container">
       <div className="row">
@@ -78,8 +127,16 @@ const App = ({drizzleContext}) => {
       </div>
       <div className="row">
         <div className="col m12">
-          <p>The current greetings is:</p>
-          <p>{newGreetings}</p>
+          <p>The current greetings is: {currentGreetings}</p>
+        </div>
+        <div className="col m12">
+          <p>
+            The service fee is:{" "}
+            {serviceFee !== null
+              ? drizzle.web3.utils.fromWei(serviceFee, "ether")
+              : null}{" "}
+            ETH
+          </p>
         </div>
       </div>
       <div className="row">

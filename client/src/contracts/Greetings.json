@@ -4533,12 +4533,12 @@
         }
       },
       "links": {},
-      "address": "0x4FAb2536C5993E22dba0B1307b2902BAC984E353",
-      "transactionHash": "0x410de4dbea4ef4387f5aca76a39432bf9c45d659a9128b9b7dda27b244d574df"
+      "address": "0x665f95043b5C7489b9B8ffB7F4109265E6e0fEfE",
+      "transactionHash": "0x78a59c77f5b6f6bb8a10ef4675e9ff238507327592a305de9b6393252439ec77"
     }
   },
   "schemaVersion": "3.0.17",
-  "updatedAt": "2019-11-08T10:25:36.643Z",
+  "updatedAt": "2019-11-08T11:47:52.951Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
