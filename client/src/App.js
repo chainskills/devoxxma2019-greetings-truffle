@@ -49,10 +49,10 @@ const App = ({drizzleContext}) => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col m6">
+        <div className="col s12 m6 offset-m3">
           <div className="avatar">
             <JazzIcon diameter={40} seed={jsNumberForAddress(account)} />
-            <p className="truncate account">{account}</p>
+            <p className="account">{account}</p>
             <p className="balance">{balance} ETH</p>
           </div>
         </div>

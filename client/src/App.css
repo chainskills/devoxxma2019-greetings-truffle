@@ -21,11 +21,11 @@ body {
 
 .account {
   position: relative;
-  top: 7px;
-  width: 130px;
-  padding-left: 10px;
+  top: 12px;
+  padding-left: 55px;
 }
 
 .balance {
-  padding-left: 53px;
+  position: relative;
+  padding-left: 55px;
 }
