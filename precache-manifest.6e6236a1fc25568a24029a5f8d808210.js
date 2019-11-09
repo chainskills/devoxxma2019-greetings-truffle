@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "36dab2b0a9cc8bb4982b823af839b316",
+    "revision": "030b820b0a35b1ef1010b50055258a34",
     "url": "/devoxxma2019-greetings-truffle/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/devoxxma2019-greetings-truffle/static/css/2.e315d21c.chunk.css"
   },
   {
-    "revision": "fc7299a4a7aa6c1579a5",
+    "revision": "012e53787fed9c824810",
     "url": "/devoxxma2019-greetings-truffle/static/css/main.df3e89bc.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/devoxxma2019-greetings-truffle/static/js/2.4d96ed46.chunk.js"
   },
   {
-    "revision": "fc7299a4a7aa6c1579a5",
-    "url": "/devoxxma2019-greetings-truffle/static/js/main.84e0bf2a.chunk.js"
+    "revision": "012e53787fed9c824810",
+    "url": "/devoxxma2019-greetings-truffle/static/js/main.13655bf7.chunk.js"
   },
   {
     "revision": "e4f78783362d0722a7f2",
