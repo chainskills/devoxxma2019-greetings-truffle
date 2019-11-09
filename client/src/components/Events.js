@@ -2,8 +2,6 @@ import React, {useState} from "react";
 
 import "materialize-css/dist/css/materialize.min.css";
 
-import "./Account.css";
-
 const Events = ({drizzle, owner}) => {
   const {Greetings} = drizzle.contracts;
   const [eventGreetings, setEventGreetings] = useState(null);
