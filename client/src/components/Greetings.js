@@ -34,9 +34,6 @@ const Greetings = ({drizzle, account, serviceFee}) => {
         gas: 500000,
         value: serviceFee
       })
-      .on("receipt", receipt => {
-        console.log(receipt);
-      })
       .on("error", err => {
         console.error(err);
       });

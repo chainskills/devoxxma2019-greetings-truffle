@@ -119,8 +119,7 @@ const App = ({drizzleContext}) => {
         <div className="col m8 push-m4 greetings-data">
           <Events
             drizzle={drizzle}
-            greetings={currentGreetings}
-            serviceFee={serviceFeeRef}
+            owner={owner === account ? true : false}
           />
         </div>
       </div>

@@ -14,15 +14,13 @@ const Account = ({account, balance}) => {
   }, []);
 
   return (
-
-      <div className="col m4">
-        <div className="avatar">
-          <JazzIcon diameter={40} seed={jsNumberForAddress(account)} />
-          <p className="account truncate">{account}</p>
-          <p className="balance">{balance} ETH</p>
-        </div>
+    <div className="col m4">
+      <div className="avatar">
+        <JazzIcon diameter={40} seed={jsNumberForAddress(account)} />
+        <p className="account truncate">{account}</p>
+        <p className="balance">{parseFloat(balance).toFixed(4)} ETH</p>
       </div>
-    
+    </div>
   );
 };
 
