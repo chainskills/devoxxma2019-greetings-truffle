@@ -18,7 +18,8 @@
  *
  */
 
-// const HDWalletProvider = require('truffle-hdwallet-provider');
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+require("dotenv").config();
 // const infuraKey = "fj4jll3k.....";
 //
 // const fs = require('fs');
@@ -37,10 +38,19 @@ module.exports = {
 
   networks: {
     ganache: {
-      host: '127.0.0.1',
+      host: "127.0.0.1",
       port: 7545,
-      network_id: '*',
+      network_id: "*",
       websockets: true
+    },
+    ropsten: {
+      provider: () =>
+        new HDWalletProvider(
+          process.env.MNEMONIC,
+          `https://ropsten.infura.io/v3/` + process.env.INFURA_PROJECT_ID
+        ),
+      network_id: 3, // Ropsten's id
+      gas: 5500000 // Ropsten has a lower block limit than mainnet
     }
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.

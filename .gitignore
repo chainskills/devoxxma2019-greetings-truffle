@@ -7,6 +7,9 @@ node_modules
 # Mac specific
 .DS_Store
 
+# Environment file
+.env
+
 # Logs
 logs
 *.log
