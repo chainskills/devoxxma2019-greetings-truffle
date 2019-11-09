@@ -7,6 +7,7 @@ import Account from "./components/Account";
 import Information from "./components/Information";
 import Greetings from "./components/Greetings";
 import ServiceFee from "./components/ServiceFee";
+import Events from "./components/Events";
 
 import "./App.css";
 
@@ -112,6 +113,15 @@ const App = ({drizzleContext}) => {
               serviceFee={serviceFeeRef}
             />
           )}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col m8 push-m4 greetings-data">
+          <Events
+            drizzle={drizzle}
+            greetings={currentGreetings}
+            serviceFee={serviceFeeRef}
+          />
         </div>
       </div>
     </div>
