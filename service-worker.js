@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/devoxxma2019-greetings-truffle/client/precache-manifest.cdab30c44107211045264459ffb6ded1.js"
+  "/devoxxma2019-greetings-truffle/client/precache-manifest.176a74525d2a4eefff29e3095552a94d.js"
 );
 
 self.addEventListener('message', (event) => {
