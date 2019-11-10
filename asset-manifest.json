@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/devoxxma2019-greetings-truffle/static/css/main.df3e89bc.chunk.css",
-    "main.js": "/devoxxma2019-greetings-truffle/static/js/main.39b2d566.chunk.js",
-    "main.js.map": "/devoxxma2019-greetings-truffle/static/js/main.39b2d566.chunk.js.map",
+    "main.js": "/devoxxma2019-greetings-truffle/static/js/main.674f814d.chunk.js",
+    "main.js.map": "/devoxxma2019-greetings-truffle/static/js/main.674f814d.chunk.js.map",
     "runtime-main.js": "/devoxxma2019-greetings-truffle/static/js/runtime-main.f6235dc9.js",
     "runtime-main.js.map": "/devoxxma2019-greetings-truffle/static/js/runtime-main.f6235dc9.js.map",
     "static/css/2.e315d21c.chunk.css": "/devoxxma2019-greetings-truffle/static/css/2.e315d21c.chunk.css",
     "static/js/2.4d96ed46.chunk.js": "/devoxxma2019-greetings-truffle/static/js/2.4d96ed46.chunk.js",
     "static/js/2.4d96ed46.chunk.js.map": "/devoxxma2019-greetings-truffle/static/js/2.4d96ed46.chunk.js.map",
     "index.html": "/devoxxma2019-greetings-truffle/index.html",
-    "precache-manifest.c9c8b6e4c2f370be7024c636820645dd.js": "/devoxxma2019-greetings-truffle/precache-manifest.c9c8b6e4c2f370be7024c636820645dd.js",
+    "precache-manifest.5ffaecbecf6910c56d4e09216c83d490.js": "/devoxxma2019-greetings-truffle/precache-manifest.5ffaecbecf6910c56d4e09216c83d490.js",
     "service-worker.js": "/devoxxma2019-greetings-truffle/service-worker.js",
     "static/css/2.e315d21c.chunk.css.map": "/devoxxma2019-greetings-truffle/static/css/2.e315d21c.chunk.css.map",
     "static/css/main.df3e89bc.chunk.css.map": "/devoxxma2019-greetings-truffle/static/css/main.df3e89bc.chunk.css.map"
@@ -19,6 +19,6 @@
     "static/css/2.e315d21c.chunk.css",
     "static/js/2.4d96ed46.chunk.js",
     "static/css/main.df3e89bc.chunk.css",
-    "static/js/main.39b2d566.chunk.js"
+    "static/js/main.674f814d.chunk.js"
   ]
 }
