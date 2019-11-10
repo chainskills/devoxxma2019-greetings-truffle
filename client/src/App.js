@@ -41,17 +41,17 @@ const App = ({drizzleContext}) => {
           document.querySelectorAll(".has-character-counter")
         );
 
-        const {Greetings} = drizzle.contracts;
+        // const {Greetings} = drizzle.contracts;
 
-        setGreetingsKey(Greetings.methods.getGreetings.cacheCall());
+        // setGreetingsKey(Greetings.methods.getGreetings.cacheCall());
 
-        setServiceFee(await Greetings.methods.getServiceFee().call());
+        // setServiceFee(await Greetings.methods.getServiceFee().call());
 
-        setOwner(await Greetings.methods.owner().call());
+        // setOwner(await Greetings.methods.owner().call());
 
-        setEarnings(await drizzle.web3.eth.getBalance(Greetings.address));
+        // setEarnings(await drizzle.web3.eth.getBalance(Greetings.address));
 
-        setEnable(await Greetings.methods.enable().call());
+        // setEnable(await Greetings.methods.enable().call());
       }
       fetchAccount();
     }
@@ -72,17 +72,17 @@ const App = ({drizzleContext}) => {
     window.location.reload();
   });
 
-  // prepare ...
+  // // prepare ...
   let currentGreetings = null;
-  if (greetingsKey !== null) {
-    if (
-      drizzleState.contracts.Greetings.getGreetings[greetingsKey] &&
-      drizzleState.contracts.Greetings.getGreetings[greetingsKey].value
-    ) {
-      currentGreetings =
-        drizzleState.contracts.Greetings.getGreetings[greetingsKey].value;
-    }
-  }
+  // if (greetingsKey !== null) {
+  //   if (
+  //     drizzleState.contracts.Greetings.getGreetings[greetingsKey] &&
+  //     drizzleState.contracts.Greetings.getGreetings[greetingsKey].value
+  //   ) {
+  //     currentGreetings =
+  //       drizzleState.contracts.Greetings.getGreetings[greetingsKey].value;
+  //   }
+  // }
 
   return (
     <div className="container">

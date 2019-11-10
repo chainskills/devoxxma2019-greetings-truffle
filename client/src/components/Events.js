@@ -9,78 +9,78 @@ const Events = ({drizzle, owner}) => {
   const [eventMap, setEventMap] = useState(new Map());
 
   const subscribe = () => {
-    if (eventGreetings === null) {
-      const event = Greetings.events
-        .GreetingsChangedEvent({
-          fromBlock: "latest",
-          toBlock: "latest"
-        })
-        .on("data", function(eventGreetings) {
-          if (typeof eventMap.get(eventGreetings.id) === "undefined") {
-            const eventMessage =
-              "Account: " +
-              eventGreetings.returnValues._account +
-              " Greetings: " +
-              eventGreetings.returnValues._greetings;
+    // if (eventGreetings === null) {
+    //   const event = Greetings.events
+    //     .GreetingsChangedEvent({
+    //       fromBlock: "latest",
+    //       toBlock: "latest"
+    //     })
+    //     .on("data", function(eventGreetings) {
+    //       if (typeof eventMap.get(eventGreetings.id) === "undefined") {
+    //         const eventMessage =
+    //           "Account: " +
+    //           eventGreetings.returnValues._account +
+    //           " Greetings: " +
+    //           eventGreetings.returnValues._greetings;
 
-            eventMap.set(eventGreetings.id, {
-              key: eventGreetings.id,
-              name: eventGreetings.event,
-              message: eventMessage
-            });
-            setEventMap(eventMap);
-          }
-        })
-        .on("error", function(error) {
-          console.error(error);
-        });
+    //         eventMap.set(eventGreetings.id, {
+    //           key: eventGreetings.id,
+    //           name: eventGreetings.event,
+    //           message: eventMessage
+    //         });
+    //         setEventMap(eventMap);
+    //       }
+    //     })
+    //     .on("error", function(error) {
+    //       console.error(error);
+    //     });
 
-      setEventGreetings(event);
-    }
+    //   setEventGreetings(event);
+    // }
 
-    if (owner && eventServiceFee === null) {
-      const event = Greetings.events
-        .NewServiceFeeEvent({
-          fromBlock: "latest",
-          toBlock: "latest"
-        })
-        .on("data", function(eventServiceFee) {
-          if (typeof eventMap.get(eventServiceFee.id) === "undefined") {
-            const eventMessage =
-              "New Service fee: " +
-              drizzle.web3.utils.fromWei(
-                eventServiceFee.returnValues._serviceFee,
-                "ether"
-              );
+    // if (owner && eventServiceFee === null) {
+    //   const event = Greetings.events
+    //     .NewServiceFeeEvent({
+    //       fromBlock: "latest",
+    //       toBlock: "latest"
+    //     })
+    //     .on("data", function(eventServiceFee) {
+    //       if (typeof eventMap.get(eventServiceFee.id) === "undefined") {
+    //         const eventMessage =
+    //           "New Service fee: " +
+    //           drizzle.web3.utils.fromWei(
+    //             eventServiceFee.returnValues._serviceFee,
+    //             "ether"
+    //           );
 
-            eventMap.set(eventServiceFee.id, {
-              key: eventServiceFee.id,
-              name: eventServiceFee.event,
-              message: eventMessage
-            });
+    //         eventMap.set(eventServiceFee.id, {
+    //           key: eventServiceFee.id,
+    //           name: eventServiceFee.event,
+    //           message: eventMessage
+    //         });
 
-            setEventMap(eventMap);
-          }
-        })
-        .on("error", function(error) {
-          console.error(error);
-        });
+    //         setEventMap(eventMap);
+    //       }
+    //     })
+    //     .on("error", function(error) {
+    //       console.error(error);
+    //     });
 
-      setEventServiceFee(event);
-    }
+    //   setEventServiceFee(event);
+    // }
   };
 
   const unsubscribe = () => {
-    if (eventGreetings !== null) {
-      eventGreetings.unsubscribe();
-      setEventGreetings(null);
-    }
-    if (eventServiceFee !== null) {
-      eventServiceFee.unsubscribe();
-      setEventServiceFee(null);
-    }
+    // if (eventGreetings !== null) {
+    //   eventGreetings.unsubscribe();
+    //   setEventGreetings(null);
+    // }
+    // if (eventServiceFee !== null) {
+    //   eventServiceFee.unsubscribe();
+    //   setEventServiceFee(null);
+    // }
 
-    setEventMap(new Map());
+    // setEventMap(new Map());
   };
 
   let allEvents = [];

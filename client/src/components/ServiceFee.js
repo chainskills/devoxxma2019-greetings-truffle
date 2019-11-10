@@ -14,21 +14,20 @@ const ServiceFee = ({drizzle, account, serviceFee}) => {
   };
 
   const onSaveServiceFee = () => {
-    const {Greetings} = drizzle.contracts;
-
-    // save the project
-    Greetings.methods
-      .setServiceFee(drizzle.web3.utils.toWei(newFee))
-      .send({
-        from: account,
-        gas: 500000
-      })
-      .on("receipt", receipt => {
-        console.log(receipt);
-      })
-      .on("error", err => {
-        console.error(err);
-      });
+    // const {Greetings} = drizzle.contracts;
+    // // save the project
+    // Greetings.methods
+    //   .setServiceFee(drizzle.web3.utils.toWei(newFee))
+    //   .send({
+    //     from: account,
+    //     gas: 500000
+    //   })
+    //   .on("receipt", receipt => {
+    //     console.log(receipt);
+    //   })
+    //   .on("error", err => {
+    //     console.error(err);
+    //   });
   };
 
   return (
