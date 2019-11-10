@@ -21,18 +21,7 @@ const Information = ({
   }, []);
 
   const onTransferEarning = () => {
-    const {Greetings} = drizzle.contracts;
-
-    // save the project
-    Greetings.methods
-      .transferEarning()
-      .send({
-        from: account,
-        gas: 500000
-      })
-      .on("error", err => {
-        console.error(err);
-      });
+    // TODO: transfer earnings to the contract owner
   };
 
   return (
