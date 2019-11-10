@@ -13,6 +13,7 @@ const Information = ({
   serviceFee,
   owner
 }) => {
+  
   useEffect(() => {
     M.AutoInit();
 

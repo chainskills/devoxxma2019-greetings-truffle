@@ -20,7 +20,7 @@ const App = ({drizzleContext}) => {
   const [enable, setEnable] = useState(false);
 
   const [greetingsKey, setGreetingsKey] = useState(null);
-  const [serviceFeeKey, setServiceFeeKey] = useState(null);
+  const [serviceFee, setServiceFee] = useState(0);
 
   useEffect(() => {
     M.AutoInit();
@@ -42,10 +42,10 @@ const App = ({drizzleContext}) => {
         );
 
         const {Greetings} = drizzle.contracts;
+
         setGreetingsKey(Greetings.methods.getGreetings.cacheCall());
-        setServiceFeeKey(
-          Greetings.methods.getServiceFee.cacheCall({from: currAccout})
-        );
+
+        setServiceFee(await Greetings.methods.getServiceFee().call());
 
         setOwner(await Greetings.methods.owner().call());
 
@@ -84,17 +84,6 @@ const App = ({drizzleContext}) => {
     }
   }
 
-  let serviceFeeRef = null;
-  if (serviceFeeKey !== null) {
-    if (
-      drizzleState.contracts.Greetings.getServiceFee[serviceFeeKey] &&
-      drizzleState.contracts.Greetings.getServiceFee[serviceFeeKey].value
-    ) {
-      serviceFeeRef =
-        drizzleState.contracts.Greetings.getServiceFee[serviceFeeKey].value;
-    }
-  }
-
   return (
     <div className="container">
       <div className="row">
@@ -110,7 +99,9 @@ const App = ({drizzleContext}) => {
           <Information
             drizzle={drizzle}
             greetings={currentGreetings}
-            serviceFee={serviceFeeRef}
+            serviceFee={drizzle.web3.utils.toBN(
+              serviceFee !== null ? serviceFee : 0
+            )}
             account={account}
             earnings={earnings}
             owner={owner === account ? true : false}
@@ -118,14 +109,16 @@ const App = ({drizzleContext}) => {
           <Greetings
             drizzle={drizzle}
             account={account}
-            serviceFee={serviceFeeRef}
+            serviceFee={serviceFee}
           />
 
           {owner === account && (
             <ServiceFee
               drizzle={drizzle}
               account={account}
-              serviceFee={serviceFeeRef}
+              serviceFee={drizzle.web3.utils.toBN(
+                serviceFee !== null ? serviceFee : 0
+              )}
             />
           )}
         </div>
