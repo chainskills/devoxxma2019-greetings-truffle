@@ -5,8 +5,7 @@ import "materialize-css/dist/css/materialize.min.css";
 const ServiceFee = ({drizzle, account, serviceFee}) => {
   const [newFee, setNewFee] = useState(
     drizzle.web3.utils.fromWei(
-      serviceFee !== null ? drizzle.web3.utils.toBN(serviceFee) : 0,
-      "ether"
+      drizzle.web3.utils.toBN(serviceFee !== null ? serviceFee : 0, "ether")
     )
   );
 

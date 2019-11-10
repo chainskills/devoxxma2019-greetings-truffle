@@ -16,6 +16,7 @@ const App = ({drizzleContext}) => {
   const [account, setAccount] = useState(null);
   const [balance, setBalance] = useState(0);
   const [owner, setOwner] = useState(null);
+  const [earnings, setEarnings] = useState(0);
 
   const [greetingsKey, setGreetingsKey] = useState(null);
   const [serviceFeeKey, setServiceFeeKey] = useState(null);
@@ -46,6 +47,11 @@ const App = ({drizzleContext}) => {
         );
 
         setOwner(await Greetings.methods.owner().call());
+
+        const currEarnings = await drizzle.web3.eth.getBalance(
+          Greetings.address
+        );
+        setEarnings(currEarnings);
       }
       fetchAccount();
     }
@@ -99,6 +105,9 @@ const App = ({drizzleContext}) => {
             drizzle={drizzle}
             greetings={currentGreetings}
             serviceFee={serviceFeeRef}
+            account={account}
+            earnings={earnings}
+            owner={owner === account ? true : false}
           />
           <Greetings
             drizzle={drizzle}
@@ -117,10 +126,7 @@ const App = ({drizzleContext}) => {
       </div>
       <div className="row">
         <div className="col m8 push-m4 greetings-data">
-          <Events
-            drizzle={drizzle}
-            owner={owner === account ? true : false}
-          />
+          <Events drizzle={drizzle} owner={owner === account ? true : false} />
         </div>
       </div>
     </div>

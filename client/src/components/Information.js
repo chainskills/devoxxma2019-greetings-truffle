@@ -1,16 +1,38 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 
 import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css/dist/js/materialize.min.js";
 
 import "./Account.css";
 
-const Information = ({drizzle, greetings, serviceFee}) => {
+const Information = ({
+  drizzle,
+  greetings,
+  account,
+  earnings,
+  serviceFee,
+  owner
+}) => {
   useEffect(() => {
     M.AutoInit();
 
     // eslint-disable-next-line
   }, []);
+
+  const onTransferEarning = () => {
+    const {Greetings} = drizzle.contracts;
+
+    // save the project
+    Greetings.methods
+      .transferEarning()
+      .send({
+        from: account,
+        gas: 500000
+      })
+      .on("error", err => {
+        console.error(err);
+      });
+  };
 
   return (
     <div className="row">
@@ -26,6 +48,32 @@ const Information = ({drizzle, greetings, serviceFee}) => {
           ETH
         </p>
       </div>
+      {owner && (
+        <div>
+          <div className="col m8">
+            <p>
+              Your earning is:{" "}
+              {drizzle.web3.utils.fromWei(
+                drizzle.web3.utils.toBN(earnings),
+                "ether"
+              )}{" "}
+              ETH
+            </p>
+          </div>
+          {earnings > 0 && (
+            <div className="col m3">
+              <a
+                href="#!"
+                className="waves-effect waves-light btn left primary-content blue"
+                style={{margin: "5px"}}
+                onClick={() => onTransferEarning()}
+              >
+                Transfer
+              </a>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
