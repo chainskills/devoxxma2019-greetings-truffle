@@ -109,7 +109,9 @@ const App = ({drizzleContext}) => {
           <Greetings
             drizzle={drizzle}
             account={account}
-            serviceFee={serviceFee}
+            serviceFee={drizzle.web3.utils.toBN(
+              serviceFee !== null ? serviceFee : 0
+            )}
           />
 
           {owner === account && (
