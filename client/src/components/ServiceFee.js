@@ -15,6 +15,16 @@ const ServiceFee = ({drizzle, account, serviceFee}) => {
 
   const onSaveServiceFee = () => {
     // TODO: Save the new service fee
+
+    // save the new service fee
+    const {Greetings} = drizzle.contracts;
+
+    Greetings.methods
+      .setServiceFee(drizzle.web3.utils.toWei(newFee))
+      .send({from: account, gas: 500000})
+      .on("error", err => {
+        console.err(err);
+      });
   };
 
   return (

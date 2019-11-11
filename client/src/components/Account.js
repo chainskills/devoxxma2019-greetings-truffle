@@ -14,11 +14,23 @@ const Account = ({drizzle, enable, owner, account, balance}) => {
   }, []);
 
   const disableContract = () => {
-    // TODO: disable the contract
+    const {Greetings} = drizzle.contracts;
+    Greetings.methods
+      .disableContract()
+      .send({from: account, gas: 500000})
+      .on("error", err => {
+        console.err(err);
+      });
   };
 
   const enableContract = () => {
-    // TODO: enable the contract
+    const {Greetings} = drizzle.contracts;
+    Greetings.methods
+      .enableContract()
+      .send({from: account, gas: 500000})
+      .on("error", err => {
+        console.err(err);
+      });
   };
 
   return (

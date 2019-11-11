@@ -44,15 +44,15 @@ const App = ({drizzleContext}) => {
         const {Greetings} = drizzle.contracts;
 
         // TODO: Initialize state variables
-        // setGreetingsKey(/* cache call greetings message */);
+        setGreetingsKey(Greetings.methods.getGreetings.cacheCall());
 
-        // setServiceFee(/* get service fee */);
+        setServiceFee(await Greetings.methods.getServiceFee().call());
 
-        // setOwner(/* get contract owner */);
+        setOwner(await Greetings.methods.owner().call());
 
-        // setEarnings(/* get balance of the contract */);
+        setEarnings(await drizzle.web3.eth.getBalance(Greetings.address));
 
-        // setEnable(/* get enable status */);
+        setEnable(await Greetings.methods.enable().call());
       }
       fetchAccount();
     }
@@ -76,8 +76,13 @@ const App = ({drizzleContext}) => {
   // prepare ...
   let currentGreetings = null;
   if (greetingsKey !== null) {
-    // TODO get greetings from cache
-    /* retrieve greetings value only if data is ready */
+    if (
+      drizzleState.contracts.Greetings.getGreetings[greetingsKey] &&
+      drizzleState.contracts.Greetings.getGreetings[greetingsKey].value
+    ) {
+      currentGreetings =
+        drizzleState.contracts.Greetings.getGreetings[greetingsKey].value;
+    }
   }
 
   return (

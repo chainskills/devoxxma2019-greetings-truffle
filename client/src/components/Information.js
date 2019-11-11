@@ -13,7 +13,6 @@ const Information = ({
   serviceFee,
   owner
 }) => {
-  
   useEffect(() => {
     M.AutoInit();
 
@@ -21,7 +20,14 @@ const Information = ({
   }, []);
 
   const onTransferEarning = () => {
-    // TODO: transfer earnings to the contract owner
+    const {Greetings} = drizzle.contracts;
+
+    Greetings.methods
+      .transferEarning()
+      .send({from: account, gas: 500000})
+      .on("data", err => {
+        console.err(err);
+      });
   };
 
   return (

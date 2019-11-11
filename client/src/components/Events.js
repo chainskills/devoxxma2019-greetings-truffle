@@ -11,8 +11,11 @@ const Events = ({drizzle, owner}) => {
   const subscribe = () => {
     if (eventGreetings === null) {
       // TODO: Listen to the event when the greetings message changed
-      /*
-      const event = // Fill your code here
+      const event = Greetings.events
+        .GreetingsChangedEvent({
+          fromBlock: "latest",
+          lastBlock: "latest"
+        })
         .on("data", function(eventGreetings) {
           if (typeof eventMap.get(eventGreetings.id) === "undefined") {
             const eventMessage =
@@ -34,13 +37,16 @@ const Events = ({drizzle, owner}) => {
         });
 
       setEventGreetings(event);
-      */
     }
 
     if (owner && eventServiceFee === null) {
       // TODO: Listen to the event when the service fee changed
-      /*
-      const event = // Fill your code here
+
+      const event = Greetings.events
+        .NewServiceFeeEvent({
+          fromBlock: "latest",
+          lastBlock: "latest"
+        })
         .on("data", function(eventServiceFee) {
           if (typeof eventMap.get(eventServiceFee.id) === "undefined") {
             const eventMessage =
@@ -64,12 +70,21 @@ const Events = ({drizzle, owner}) => {
         });
 
       setEventServiceFee(event);
-      */
     }
   };
 
   const unsubscribe = () => {
     // TODO: unsubcribe all events
+
+    if (eventGreetings !== null) {
+      eventGreetings.unsubscribe();
+      setEventGreetings(null);
+    }
+
+    if (eventServiceFee !== null) {
+      eventServiceFee.unsubscribe();
+      setEventServiceFee(null);
+    }
 
     setEventMap(new Map());
   };

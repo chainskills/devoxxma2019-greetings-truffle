@@ -24,7 +24,15 @@ const Greetings = ({drizzle, account, serviceFee}) => {
   };
 
   const onSaveGreetings = () => {
-    // TODO: Save the new greetings
+    const {Greetings} = drizzle.contracts;
+
+    // save the new greetings
+    Greetings.methods
+      .setGreetings(greetings)
+      .send({from: account, gas: 500000, value: serviceFee})
+      .on("error", err => {
+        console.error(err);
+      });
   };
 
   return (
