@@ -1,6 +1,6 @@
 # Greetings - Say Hello to Ethereum
 
-Sample Ethereum smart contract using Truffle 5, Ganache and web3.js 1.x.
+Sample Ethereum smart contract using Metamask, Truffle 5, Ganache and web3.js 1.x.
 
 Follow the steps described below to install, deploy and run the Dapp.
 
