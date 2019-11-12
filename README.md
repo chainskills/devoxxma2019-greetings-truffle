@@ -127,9 +127,11 @@ truffle(ganache)> await greetings.methods.getGreetings().call()
 ```
 
 ## Learn more
-
 If you want to know more about all the steps required to install, build and deploy a Dapp, you can subscribe to our course available on Udemy: https://www.udemy.com/getting-started-with-ethereum-solidity-development
+
+We have also a lean-published ebook available on leanpub: https://leanpub.com/blockchain-developer
 
 Have fun !!!
 
 ChainSkills Team - 2019
+
